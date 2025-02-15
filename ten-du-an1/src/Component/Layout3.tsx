@@ -114,23 +114,27 @@ const Layout = () => {
                 </div>
 
                 {/* Clock */}
-                <div className="flex justify-center items-center mt-6">
+                <div className="flex justify-center items-center mt-6 w-full">
                     <Clock time={time} setTime={setTime} />
                 </div>
 
                 {/* List */}
                 <div className="flex justify-center items-center mt-6">
-                    <div className="text-white w-full max-w-2xl px-4">
-                        {todo.map((item, index) => (
+                    <div className="text-white w-full max-w-3xl p-4 bg-white rounded-lg">
+                        {
+                            todo.length === 0 ? 
+                            <p className="text-center text-white p-2 text-red-500 text-3xl">...</p>
+                            :
+                            todo.map((item, index) => (
                             <div key={index} className="flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-blue-500 to-green-500 p-3 rounded-md shadow-md mb-3 transition-all duration-300 hover:shadow-lg">
                                 {/* Task */}
-                                <div className={`truncate w-full sm:w-[300px] text-white font-medium p-2 rounded-md ${item.completed ? "bg-gradient-to-r from-blue-700 to-green-700" : "bg-gradient-to-r from-blue-500 to-green-500"}`}>
+                                <div className={`text-center lg:text-left truncate w-full sm:w-[300px] text-white font-medium p-2 rounded-md ${item.completed ? "bg-gradient-to-r from-blue-700 to-green-700" : "bg-gradient-to-r from-blue-500 to-green-500"}`}>
                                     {item.task}
                                 </div>
 
                                 {/* Actions */}
-                                <div className="flex gap-x-2 mt-2 sm:mt-0">
-                                    <div className="text-sm text-gray-200">{formatTime(item.time)}</div>
+                                <div className="flex gap-x-2 mt-4 sm:mt-0">
+                                    <div className="text-sm text-gray-200 pt-2 pr-5">{formatTime(item.time)}</div>
 
                                     {!item.completed && (
                                         <>
@@ -145,8 +149,11 @@ const Layout = () => {
                                     )}
                                 </div>
                             </div>
-                        ))}
+                            ))
+                        }
+                          <div className="text-black font-bold text-center uppercase">Your mind is for having ideas, not holding them</div>
                     </div>
+                  
                 </div>
             </div>
 
