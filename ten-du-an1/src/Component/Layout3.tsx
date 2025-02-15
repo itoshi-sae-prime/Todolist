@@ -24,7 +24,7 @@ const Layout = () => {
             return;
         }
         else {
-            alert("Succes");
+            alert("Success");
             setTask('');
         }
         const nanoId = nanoid();
@@ -78,62 +78,78 @@ const Layout = () => {
     };
     return (
         <>
-            <div className={`bg-${color} h-[100vh]`}>
+            <div className={`bg-${color} min-h-screen`}>
                 {/* Header */}
-                <div className="px-12 py-8">
-                    <div className="flex justify-end gap gap-x-5">
-                        <ChangeColorButton color="blue-500" setColor={setColor} />
+                <div className="px-6 py-4 sm:px-12 sm:py-8">
+                    <div className="flex justify-end gap-3 sm:gap-5">
+                        <ChangeColorButton color="gradient-to-r from-purple-500 to-blue-500" setColor={setColor} />
                         <ChangeColorButton color="gradient-to-r from-blue-500 to-green-500" setColor={setColor} />
-                        <ChangeColorButton color="green-500" setColor={setColor} />
-                        <ChangeColorButton color="gradient-to-r from-green-500 to-blue-500" setColor={setColor} />
+                        <ChangeColorButton color="gradient-to-r from-green-500 to-yellow-500" setColor={setColor} />
+                        <ChangeColorButton color="gradient-to-r from-green-500 to-orange-500" setColor={setColor} />
                     </div>
                 </div>
+
                 {/* Title */}
-                <div className="">
-                    <p className="text-center text-[100px] text-white title-1 bg-pur">Just do it. </p>
-                    {/* Input */}
-                    <div className="flex justify-center items-center mt-[45px]">
-                        <input className={`w-[500px] p-2 rounded-l-[25px] bg-${color} border-2 text-white type="text`} placeholder="Add a task" onChange={handleonChangesTask} value={task} />
-                        <button className="bg-white p-2 rounded-r-[25px] border-2" onClick={handleAdd}>Add This!</button>
-                    </div>\
-                    {/* Clock */}
-                    <div className="flex justify-center items-center mt-[30px]">
-                        <Clock time={time} setTime={setTime} />
-                    </div>
-                    {/* List */}
-                    <div className="flex justify-center items-center mt-[30px]">
-                        <div className="text-white">
-                            {
-                                todo.map((item, index) => {
-                                    return <>
-                                        <div className="flex py-2">
-                                            <div className={`truncate hover:text-clip min-w-[100px] max-w-[600px] w-[300px] border-2 bg-${color !== "gradient-to-r from-blue-500 to-green-500" ? "gradient-to-t from-blue-500 to-green-500" : 'gradient-to-r from-blue-500 to-green-500'} rounded-md p-[5px] ${item.completed ? `bg-gradient-to-r from-blue-700 to-green-700` : `bg - gradient - to - r from-blue-500 to-green-500`}`}>{item.task}</div>
-                                            <div className="flex justify-center py-[5px] pl-3">
-                                                <div>{formatTime(item.time)}</div>
-                                                <div className="flex gap-x-3 pl-[20px]">
-                                                    <button className={`px-[10px] bg-green-700 rounded-md text-white font-bold ${item.completed ? "hidden" : "block"}`} onClick={() => handleComplete(item.id)}>V</button>
-                                                    {/* {
-                                                        toggle &&
-                                                        <div className="flex gap-x-3">
-                                                            <button className="px-[10px] bg-red-500 rounded-md text-white font-bold " onClick={() => handleDelete(item.id)}>X</button>
-                                                            <button className="px-[10px] bg-lime-400 rounded-md text-white font-bold" onClick={() => handleChange(item.id, item.task)}>Change</button>
-                                                        </div>
-                                                    } */}
-                                                    <button className={`px-[10px] bg-red-500 rounded-md text-white font-bold ${item.completed ? "hidden" : "block"}`} onClick={() => handleDelete(item.id)}>X</button>
-                                                    <button className={`px-[10px] bg-lime-400 rounded-md text-white font-bold ${item.completed ? "hidden" : "block"}`} onClick={() => handleChange(item.id, item.task)}>Change</button>
-                                                    {
-                                                        item.changed && <button className="px-[10px] bg-orange-500 rounded-md text-white font-bold" onClick={() => handleUpdate(item.id)}>Update</button>
-                                                    }
-                                                </div>
-                                            </div>
-                                        </div >
-                                    </>
-                                })
-                            }
-                        </div>
+                <div className="text-center text-white">
+                    <p className="text-4xl sm:text-6xl md:text-7xl lg:text-[100px] font-bold">Just do it.</p>
+                </div>
+
+                {/* Input */}
+                <div className="flex justify-center items-center mt-4">
+                    <div className="relative w-full max-w-[90%] sm:max-w-[500px]">
+                        <input
+                            type="text"
+                            className="w-full p-3 pl-5 pr-14 rounded-full border-2 border-gray-300 bg-white text-gray-800 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-300 outline-none transition duration-200"
+                            placeholder="Add a task..."
+                            onChange={handleonChangesTask}
+                            value={task}
+                        />
+                        <button
+                            className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-blue-500 text-white px-4 sm:px-5 py-2 rounded-full shadow-md hover:bg-blue-600 transition duration-200"
+                            onClick={handleAdd}
+                        >
+                            Add
+                        </button>
                     </div>
                 </div>
-            </div >
+
+                {/* Clock */}
+                <div className="flex justify-center items-center mt-6">
+                    <Clock time={time} setTime={setTime} />
+                </div>
+
+                {/* List */}
+                <div className="flex justify-center items-center mt-6">
+                    <div className="text-white w-full max-w-2xl px-4">
+                        {todo.map((item, index) => (
+                            <div key={index} className="flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-blue-500 to-green-500 p-3 rounded-md shadow-md mb-3 transition-all duration-300 hover:shadow-lg">
+                                {/* Task */}
+                                <div className={`truncate w-full sm:w-[300px] text-white font-medium p-2 rounded-md ${item.completed ? "bg-gradient-to-r from-blue-700 to-green-700" : "bg-gradient-to-r from-blue-500 to-green-500"}`}>
+                                    {item.task}
+                                </div>
+
+                                {/* Actions */}
+                                <div className="flex gap-x-2 mt-2 sm:mt-0">
+                                    <div className="text-sm text-gray-200">{formatTime(item.time)}</div>
+
+                                    {!item.completed && (
+                                        <>
+                                            <button className="px-2 sm:px-3 py-1 bg-green-700 rounded-md text-white font-bold hover:bg-green-800 transition duration-200" onClick={() => handleComplete(item.id)}>✔</button>
+                                            <button className="px-2 sm:px-3 py-1 bg-red-500 rounded-md text-white font-bold hover:bg-red-600 transition duration-200" onClick={() => handleDelete(item.id)}>✖</button>
+                                            <button className="px-2 sm:px-3 py-1 bg-lime-400 rounded-md text-white font-bold hover:bg-lime-500 transition duration-200" onClick={() => handleChange(item.id, item.task)}>✏️</button>
+                                        </>
+                                    )}
+
+                                    {item.changed && (
+                                        <button className="px-2 sm:px-3 py-1 bg-orange-500 rounded-md text-white font-bold hover:bg-orange-600 transition duration-200" onClick={() => handleUpdate(item.id)}>🔄</button>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
         </>
     )
 }
