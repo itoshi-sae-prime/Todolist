@@ -123,7 +123,7 @@ const Layout = () => {
                     <div className="text-white w-full max-w-3xl p-4 bg-white rounded-lg">
                         {
                             todo.length === 0 ? 
-                            <p className="text-center text-white p-2 text-red-500 text-3xl">...</p>
+                            <p className="text-center p-2 text-red-500 text-3xl">.......</p>
                             :
                             todo.map((item, index) => (
                             <div key={index} className="flex flex-col sm:flex-row items-center justify-between bg-gradient-to-r from-blue-500 to-green-500 p-3 rounded-md shadow-md mb-3 transition-all duration-300 hover:shadow-lg">
